@@ -1,0 +1,40 @@
+Q.Subarray sum equal to k
+
+arr={ 10, 2, -2, -20, 10 } k=-10
+
+
+
+
+note: sum-k=subarray(i-1)
+
+import java.util.*;
+
+public class Test {
+	public static void main(String[] args) {
+		int arr[] = { 10, 2, -2, -20, 10 };
+		int k = -10;
+		int ans = 0;
+		int sum = 0;
+		HashMap<Integer, Integer> map = new HashMap<>();// <sum,freq>
+		map.put(0, 1); // in empty subarray sum=0 and frequency=1 added
+
+		for (int j = 0; j < arr.length; j++) {
+			sum += arr[j];
+			// if map contains sum-k then add frequency to ans
+			if (map.containsKey(sum - k)) {
+				ans += map.get(sum - k);
+			}
+			// if map contains sum then increase frequency
+			if (map.containsKey(sum)) {
+				map.put(sum, map.get(sum) + 1);
+			} else {
+				map.put(sum, 1); // if map not contains sum then create new pair with frequency 1
+			}
+		}
+		System.out.print(ans);
+	}
+}
+
+
+
+ans=3
